@@ -6,7 +6,7 @@ const Users = require('../models/Users.model')
 const Questions = require('../models/questions.model')
 const Comments = require('../models/comment.model')
 
-router.get("/api/questions", isAuthenticated, (req, res) => {
+router.get("/questions", isAuthenticated, (req, res) => {
 
  Questions
     .find()
@@ -14,7 +14,7 @@ router.get("/api/questions", isAuthenticated, (req, res) => {
     .catch(err => res.status(500).json(err))
 })
 
-router.post("/api/questions", isAuthenticated, (req, res) => {
+router.post("/questions", isAuthenticated, (req, res) => {
     const { image, title, text } = req.body
     const user = req.payload._id
 
@@ -24,7 +24,7 @@ router.post("/api/questions", isAuthenticated, (req, res) => {
        .catch(err => res.status(500).json(err))
    })
 
-router.get("/api/questions/:id", isAuthenticated, (req, res) => {
+router.get("/questions/:id", isAuthenticated, (req, res) => {
     
     const id = req.params
 
