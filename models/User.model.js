@@ -3,7 +3,7 @@ const { Schema, model } = mongoose
 
 const userSchema = new Schema({
     userType: {
-        enum: ["mentor", "mentee"]
+        enum: ["Mentor", "Mentee"]
     },	
     email: {
         type: String, unique: true, required: true
