@@ -42,7 +42,8 @@ const userSchema = new Schema({
     },
     graduationYear:	{
         type:Number
-    },	
+    },
+     Comments: [{type: Schema.Types.ObjectId, ref:"comments"}],		
 })
 
 module.exports = model("User", userSchema)

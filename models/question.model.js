@@ -21,7 +21,7 @@ const questionSchema = new Schema(
             ref: 'User'
         },
         Comments: [{
-            user: {type: Schema.Types.ObjectId, ref:"user"}, text:{type:String}, timestamp:true
+            user: {type: Schema.Types.ObjectId, ref:"comments"},
         }],	
     },
     {
