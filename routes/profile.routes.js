@@ -1,8 +1,8 @@
 const router = require("express").Router()
 
 const { isAuthenticated } = require("../middlewares/jwt.middleware")
-const OwnerOnly = require("../middlewares/ownerOnly.middleware")
-const Users = require('../models/Users.model')
+const { OwnerOnly } = require("../middlewares/ownerOnly.middleware")
+const Users = require('../models/User.model')
 
 
 router.get("/profile/:id", isAuthenticated, (req, res) => {

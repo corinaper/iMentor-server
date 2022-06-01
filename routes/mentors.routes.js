@@ -2,7 +2,7 @@ const router = require("express").Router()
 
 const { isAuthenticated } = require("../middlewares/jwt.middleware")
 
-const Users = require('../models/Users.model')
+const Users = require('../models/User.model')
 
 router.get("/mentors", isAuthenticated, (req, res) => {
 

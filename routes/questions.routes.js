@@ -1,9 +1,9 @@
 const router = require("express").Router()
 
 const { isAuthenticated } = require("../middlewares/jwt.middleware")
-const OwnerOnly = require("../middlewares/ownerOnly.middleware")
-const Users = require('../models/Users.model')
-const Questions = require('../models/questions.model')
+const { OwnerOnly } = require("../middlewares/ownerOnly.middleware")
+const Users = require('../models/User.model')
+const Questions = require('../models/question.model')
 const Comments = require('../models/comment.model')
 
 router.get("/questions", isAuthenticated, (req, res) => {
@@ -34,13 +34,12 @@ router.get("/questions/:id", isAuthenticated, (req, res) => {
        .catch(err => res.status(500).json(err))
    })
 
-router.delete("/questions/:id/delete", OwnerOnly, (req, res) => {
+router.delete("/questions/:id/delete", (req, res) => {
     
     const id = req.params
 
     Questions
        .findByIdAndDelete(id)
-       .then(question => res.json(question))
        .catch(err => res.status(500).json(err))
    })
 

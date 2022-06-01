@@ -7,9 +7,10 @@ const commentsSchema = new Schema(
         }, 
     text: {
          type:String
-        },
-    timestamp:true
+        }
+    
     },
+    { timestamps: true }
 );
 
 const Comments = model("comments", commentsSchema)
