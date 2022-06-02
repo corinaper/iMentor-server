@@ -24,6 +24,17 @@ router.post("/questions", isAuthenticated, (req, res) => {
        .catch(err => res.status(500).json(err))
    })
 
+router.post("/questions/:id/edit", isAuthenticated, (req, res) => {
+    const { image, title, text } = req.body
+    const user = req.payload._id
+    const id = req.params
+
+    Questions
+       .findByIdAndUpdate(id, { image, user, title, text,  })
+       .then(questions => res.json(questions))
+       .catch(err => res.status(500).json(err))
+   })
+
 router.get("/questions/:id", isAuthenticated, (req, res) => {
     
     const id = req.params
