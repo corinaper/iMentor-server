@@ -23,6 +23,9 @@ const questionSchema = new Schema(
         Comments: [{
             user: {type: Schema.Types.ObjectId, ref:"comments"},
         }],	
+        skills: [{
+            type: Schema.Types.ObjectId, ref:"skills"
+        }]
     },
     {
         timestamps: true
