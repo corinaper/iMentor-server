@@ -14,6 +14,7 @@ router.get("/questions", isAuthenticated, (req, res) => {
     .catch(err => res.status(500).json(err))
 })
 
+//add question
 router.post("/questions", isAuthenticated, (req, res) => {
     const { image, title, text } = req.body
     const user = req.payload._id
