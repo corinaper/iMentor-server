@@ -1,6 +1,10 @@
 const router = require("express").Router();
 
-router.use("/coasters", require('./coaster.routes'))
+router.use("/mentors", require('./mentors.routes'))
+
+// router.use("/profile", require('./profile.routes'))
+
+router.use("/questions", require('./questions.routes'))
 
 router.use("/auth", require('./auth.routes'))
 
