@@ -16,22 +16,24 @@ router.get("/questions", isAuthenticated, (req, res) => {
 
 //add question
 router.post("/questions", isAuthenticated, (req, res) => {
-    const { image, title, text } = req.body
-    const user = req.payload._id
+
+    const { imageUrl, title, description, owner } = req.body
+    const user = req.params
 
     Questions
-       .create({ image, user, title, text,  })
+       .create({ imageUrl, title, description  })
        .then(questions => res.json(questions))
        .catch(err => res.status(500).json(err))
    })
 
 router.post("/questions/:id/edit", isAuthenticated, (req, res) => {
-    const { image, title, text } = req.body
+    const { imageUrl, title, description, owner } = req.body
     const user = req.payload._id
     const id = req.params
+    º
 
     Questions
-       .findByIdAndUpdate(id, { image, user, title, text,  })
+       .findByIdAndUpdate(id, { imageUrl, title, description  })
        .then(questions => res.json(questions))
        .catch(err => res.status(500).json(err))
    })
