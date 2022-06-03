@@ -4,7 +4,7 @@ router.use("/mentors", require('./mentors.routes'))
 
 // router.use("/profile", require('./profile.routes'))
 
-router.use("/questions", require('./questions.routes'))
+router.use("/", require('./questions.routes'))
 
 router.use("/auth", require('./auth.routes'))
 
