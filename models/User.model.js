@@ -21,9 +21,6 @@ const userSchema = new Schema({
     profileImg: {
         type: String, default:"http://cdn.onlinewebfonts.com/svg/img_574534.png"
     },
-    token: {
-        type: Number, default: 100
-    },
     chats: [{
         type: Schema.Types.ObjectId, ref:"chat"
     }],
