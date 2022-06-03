@@ -5,7 +5,7 @@ const { OwnerOnly } = require("../middlewares/ownerOnly.middleware")
 const Users = require('../models/User.model')
 
 
-router.get("/profile/:id", isAuthenticated, (req, res) => {
+router.get("/profile/:id", (req, res) => {
 
   const { id } = req.params
 
@@ -16,13 +16,13 @@ router.get("/profile/:id", isAuthenticated, (req, res) => {
 })
 
 
-router.post("/profile/:id/edit", OwnerOnly, (req, res) => {
+router.post("/profile/:id/edit", (req, res) => {
 
-  const { type, email,aboutMe, profileImg, course, graduationYear,skills,ocuppation,company } = req.body
+  const { username, type, aboutMe, profileImg, course, graduationYear,skills,ocuppation,company } = req.body
   const id = req.params
 
   Users
-    .findByIdandUpdate(id, { type, email,aboutMe, profileImg, course, graduationYear,skills,ocuppation,company })
+    .findByIdandUpdate(id, { type, aboutMe, profileImg, course, graduationYear,skills,ocuppation,company, username })
     .then(updatedUser => res.json(updatedUser))
     .catch(err => res.status(500).json(err))
 })
