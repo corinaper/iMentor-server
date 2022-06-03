@@ -9,7 +9,7 @@ const Comments = require('../models/comment.model')
 router.get("/questions", (req, res) => {
 
  Questions
-    .find()
+    .find().populate('owner')
     .then(questions => res.json(questions))
     .catch(err => res.status(500).json(err))
 })
