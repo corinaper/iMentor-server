@@ -3,6 +3,7 @@ const { Schema, model } = mongoose
 
 const userSchema = new Schema({
     userType: {
+        type: String,
         enum: ["Mentor", "Mentee"]
     },	
     email: {
@@ -39,7 +40,8 @@ const userSchema = new Schema({
     graduationYear:	{
         type:Number
     },
-     Comments: [{type: Schema.Types.ObjectId, ref:"comments"}],		
+     Comments: [{type: Schema.Types.ObjectId, ref:"comments"}],
+     questions:	[{type: Schema.Types.ObjectId, ref:"question"}]
 })
 
 module.exports = model("User", userSchema)

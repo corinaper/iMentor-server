@@ -6,7 +6,7 @@ const Users = require('../models/User.model')
 const Skills = require('../models/skills.model')
 const Comments = require('../models/comment.model')
 
-router.get("/skills", isAuthenticated, (req, res) => {
+router.get("/skills", (req, res) => {
 
  Skills
     .find()
@@ -14,7 +14,7 @@ router.get("/skills", isAuthenticated, (req, res) => {
     .catch(err => res.status(500).json(err))
 })
 
-router.get("/only5skills", isAuthenticated, (req, res) => {
+router.get("/only5skills", (req, res) => {
 
     Skills
        .find().limit(5)
