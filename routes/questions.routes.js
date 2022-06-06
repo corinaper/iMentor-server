@@ -17,12 +17,13 @@ router.get("/questions", isAuthenticated, (req, res) => {
 //add question
 router.post("/questions", isAuthenticated, (req, res) => {
     const { image, title, text } = req.body
-    const user = req.payload._id
+    const userId = req.payload._id
 
     Questions
-       .create({ image, user, title, text,  })
-       .then(questions => res.json(questions))
+       .create({ image, owner: userId, title, text  })
+       .then(question => Users.findByIdAndUpdate(userId,{$push:{questions:question._id}}))
        .catch(err => res.status(500).json(err))
+       
    })
 
 router.get("/questions/:id", isAuthenticated, (req, res) => {
