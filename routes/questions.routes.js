@@ -6,6 +6,7 @@ const Users = require('../models/User.model')
 const Questions = require('../models/question.model')
 const Comments = require('../models/comment.model')
 
+
 router.get("/questions", (req, res) => {
 
  Questions
@@ -17,8 +18,7 @@ router.get("/questions", (req, res) => {
 //add question
 router.post("/questions", isAuthenticated, (req, res) => {
 
-    const { imageUrl, title, description, owner } = req.body
-    const user = req.params
+    const { imageUrl, title, description } = req.body
 
     Questions
        .create({ imageUrl, title, description  })
