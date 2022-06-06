@@ -17,25 +17,14 @@ router.get("/questions", (req, res) => {
 
 //add question
 router.post("/questions", isAuthenticated, (req, res) => {
-
     const { imageUrl, title, description } = req.body
+    const userId = req.payload._id
 
     Questions
-       .create({ imageUrl, title, description  })
-       .then(questions => res.json(questions))
+       .create({ imageUrl, owner: userId, title, description  })
+       .then(question => Users.findByIdAndUpdate(userId,{$push:{questions:question._id}}))
        .catch(err => res.status(500).json(err))
-   })
-
-router.post("/questions/:id/edit", isAuthenticated, (req, res) => {
-    const { imageUrl, title, description, owner } = req.body
-    const user = req.payload._id
-    const id = req.params
-    º
-
-    Questions
-       .findByIdAndUpdate(id, { imageUrl, title, description  })
-       .then(questions => res.json(questions))
-       .catch(err => res.status(500).json(err))
+       
    })
 
 router.get("/questions/:id", isAuthenticated, (req, res) => {
