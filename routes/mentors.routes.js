@@ -4,7 +4,7 @@ const { isAuthenticated } = require("../middlewares/jwt.middleware")
 
 const Users = require('../models/User.model')
 
-router.get("/", (req, res) => {
+router.get("/mentors", (req, res) => {
 
   Users
     .find({userType:"mentor"})
