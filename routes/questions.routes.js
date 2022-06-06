@@ -6,6 +6,7 @@ const Users = require('../models/User.model')
 const Questions = require('../models/question.model')
 const Comments = require('../models/comment.model')
 
+
 router.get("/questions", (req, res) => {
 
  Questions

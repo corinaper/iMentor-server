@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-router.use("/mentors", require('./mentors.routes'))
+router.use("/", require('./mentors.routes'))
 
 router.use("/", require('./profile.routes'))
 
