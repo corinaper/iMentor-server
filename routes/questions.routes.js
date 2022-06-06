@@ -16,11 +16,11 @@ router.get("/questions", (req, res) => {
 
 //add question
 router.post("/questions", isAuthenticated, (req, res) => {
-    const { image, title, text } = req.body
+    const { imageUrl, title, description } = req.body
     const userId = req.payload._id
 
     Questions
-       .create({ image, owner: userId, title, text  })
+       .create({ imageUrl, owner: userId, title, description  })
        .then(question => Users.findByIdAndUpdate(userId,{$push:{questions:question._id}}))
        .catch(err => res.status(500).json(err))
        
