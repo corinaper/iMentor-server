@@ -50,6 +50,17 @@ router.post("/questions/:id/delete", isAuthenticated,  (req, res) => {
        .catch(err => res.status(500).json(err))
    })
 
+   router.post("/questions/:id/edit", isAuthenticated,  (req, res) => {
+    
+    const {id} = req.params
+    const { imageUrl, title, description, skills } = req.body
+    
+    Questions
+       .findByIdAndUpdate(id, { imageUrl, title, description, skills  })
+       .catch(err => res.status(500).json(err))
+        
+   })
+
 router.post("/questions/:id/comment/add", isAuthenticated, (req, res) => {
     const comment = req.body.comment
     const questionId = req.params.id
