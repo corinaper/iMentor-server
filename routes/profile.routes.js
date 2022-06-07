@@ -10,9 +10,9 @@ router.get("/profile/:id", (req, res) => {
   const { id } = req.params
 
   Users
-    .findById(id).populate("skills")
+    .findById(id).populate("skills").populate("questions")
     .then(user => res.json(user))
-    .catch(err => res.status(500).json(err))
+    .catch(err => console.log(err))
 })
 
 

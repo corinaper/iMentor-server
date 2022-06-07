@@ -39,12 +39,14 @@ router.get("/questions/:id", (req, res) => {
        .catch(err => res.status(500).json(err))
    })
 
-router.delete("/questions/:id/delete", (req, res) => {
+router.post("/questions/:id/delete", isAuthenticated,  (req, res) => {
     
     const {id} = req.params
-
+    const userId = req.payload._id
+    
     Questions
        .findByIdAndDelete(id)
+        .then(()=>Users.findByIdAndUpdate(userId, {$pull: {questions: id}}))
        .catch(err => res.status(500).json(err))
    })
 
