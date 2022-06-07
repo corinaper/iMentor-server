@@ -27,7 +27,7 @@ router.post("/questions", isAuthenticated, (req, res) => {
        
    })
 
-router.get("/questions/:id", isAuthenticated, (req, res) => {
+router.get("/questions/:id", (req, res) => {
     
     const {id} = req.params
 
