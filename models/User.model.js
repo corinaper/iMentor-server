@@ -41,7 +41,7 @@ const userSchema = new Schema({
         type:Number
     },
      Comments: [{type: Schema.Types.ObjectId, ref:"comments"}],
-     questions:	[{type: Schema.Types.ObjectId, ref:"question"}]
+     questions:	[{type: Schema.Types.ObjectId, ref:"Question"}]
 })
 
 module.exports = model("User", userSchema)
