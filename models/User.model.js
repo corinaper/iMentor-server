@@ -21,9 +21,9 @@ const userSchema = new Schema({
     profileImg: {
         type: String, default:"http://cdn.onlinewebfonts.com/svg/img_574534.png"
     },
-    chats: [{
+    chats:[{
         type: Schema.Types.ObjectId, ref:"chat"
-    }],
+    }], 
     ocuppation:	{
         type:String
     },		
