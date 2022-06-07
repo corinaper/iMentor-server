@@ -29,17 +29,19 @@ router.post("/questions", isAuthenticated, (req, res) => {
 
 router.get("/questions/:id", isAuthenticated, (req, res) => {
     
-    const id = req.params
+    const {id} = req.params
 
     Questions
-       .findById(id)
+       .findById(id).populate('owner')
+       .populate("Comments")
+        .populate({path:"Comments", populate:{path:"user"}})
        .then(question => res.json(question))
        .catch(err => res.status(500).json(err))
    })
 
 router.delete("/questions/:id/delete", (req, res) => {
     
-    const id = req.params
+    const {id} = req.params
 
     Questions
        .findByIdAndDelete(id)
@@ -47,18 +49,25 @@ router.delete("/questions/:id/delete", (req, res) => {
    })
 
 router.post("/questions/:id/comment/add", isAuthenticated, (req, res) => {
-    const { message } = req.body
-    const questionId = req.params
+    const comment = req.body.comment
+    const questionId = req.params.id
     const userId = req.payload._id
 
     Comments
-    .create({ user: userId,text: message})
+    .create({ user: userId,text: comment})
     .then((newComment)=>
     Questions
-    .findByIdAndUpdate(questionId, {$push: { Comments: newComment._id}})
-    .then(()=>
-    Users
-    .findByIdAndUpdate(userId, {$push: { Comments: newComment._id}})
+    .findByIdAndUpdate(questionId, {$push: { Comments: newComment._id}},{new: true})
+    .then((updatedQuestion)=> 
+        Users
+        .findByIdAndUpdate(userId, {$push: { Comments: newComment._id}})
+            .then(()=>
+            Questions
+                .findOne(updatedQuestion)
+                .populate("Comments")
+                .populate({path:"Comments", populate:{path:"user"}})
+                )
+            .then((populatedQuestion)=>res.json(populatedQuestion))
     ))
     .catch((err)=>console.log(err))
 

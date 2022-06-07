@@ -21,7 +21,8 @@ const questionSchema = new Schema(
             ref: 'User'
         },
         Comments: [{
-            user: {type: Schema.Types.ObjectId, ref:"comments"},
+            type: Schema.Types.ObjectId,
+            ref: 'comments'
         }],	
         skills: [{
             type: Schema.Types.ObjectId, ref:"skills"

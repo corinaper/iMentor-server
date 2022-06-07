@@ -6,7 +6,8 @@ const commentsSchema = new Schema(
          type: Schema.Types.ObjectId, ref:"User"
         }, 
     text: {
-         type:String
+         type:String,
+         required:true
         }
     
     },
