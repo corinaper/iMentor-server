@@ -19,26 +19,9 @@ router.get("/:userId/:otherUserId", isAuthenticated, (req,res,next)=>{
             {user2:{$eq:req.params.userId}},
         ]}
     ]})
-
-    .populate({path:"user1", model: User})
-    .populate({path:"user2", model: User})
-    .populate({
-        path:"messagess",
-        populate:{
-            path: "sender",
-            model: "User"
-        },
-        model: "Message"
-    })
-    .populate({
-        path:"messagess",
-        populate:{
-            path: "receiver",
-            model: "User"
-        },
-        model: "Message"
-    })
-
+    .populate("user1")
+    .populate("user2")
+    .populate("messagess")
     .then(chat=>{
         res.status(200).json(chat)
     })
@@ -80,9 +63,15 @@ router.post("/create/:user1/:user2",(req,res,next)=>{
             {user2:{$eq:user1}},
         ]}
     ]})
+    .populate("user1")
+    .populate("user2")
+    .populate("messagess")
     .then(chats=>{
         if(chats.length<1){
             Chat.create({user1, user2})
+            .populate("user1")
+            .populate("user2")
+            .populate("messagess")        
             .then(chat=>{
                 res.status(200).json(chat)
             })
