@@ -8,7 +8,7 @@ const { isAuthenticated } = require('../middlewares/jwt.middleware.js');
 const router = express.Router();
 
 
-router.get("/:userId/:otherUserId", (req,res,next)=>{
+router.get("/:userId/:otherUserId", isAuthenticated, (req,res,next)=>{
     Chat.findOne({$or:[
         {$and:[
             {user1:{$eq:req.params.userId}},
@@ -44,7 +44,7 @@ router.get("/:userId/:otherUserId", (req,res,next)=>{
     })
 })
 
-router.post("/newMessage/:chatId/", (req,res,next)=>{
+router.post("/newMessage/:chatId/", isAuthenticated, (req,res,next)=>{
 
     const {content, sender, receiver} = req.body;
 
@@ -57,7 +57,7 @@ router.post("/newMessage/:chatId/", (req,res,next)=>{
 })
 
 
-router.get("/:userId", (req,res,next)=>{
+router.get("/:userId", isAuthenticated, (req,res,next)=>{
     Chat.find({$or:[{user1:{$eq:req.params.userId}},{user2:{$eq:req.params.userId}}]})
     .populate({path:"user1",model:User})
     .populate({path:"user2",model:User})
@@ -67,7 +67,7 @@ router.get("/:userId", (req,res,next)=>{
     })
 })
 
-router.post("/create",(req,res,next)=>{
+router.post("/create",isAuthenticated,(req,res,next)=>{
     const {user1, user2} = req.body;
 
     Chat.find({$or:[
