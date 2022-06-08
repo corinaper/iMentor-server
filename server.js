@@ -12,18 +12,18 @@ const PORT = process.env.PORT || 5005;
 
 io.on('connection', (socket) => {
 
-  console.log('new connection', socket)
+  console.log('NEW CONNECTION', socket)
   socket.on('newMessage', users=>{
     io.emit('updateChat', users)
   })
 
-  socket.on('acceptedFavour',()=>{
+ {/* socket.on('acceptedFavour',()=>{
     io.emit('updateFavours',[])
   })
 
   socket.on('createdFavour',()=>{
     io.emit('updateFavours',[])
-  })
+  })*/}
 });
 
 server.listen(PORT, () => {
