@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const chatSchema = new Schema({
-  user1: { type: Schema.Types.ObjectId, ref:"user"},
-  user2: { type: Schema.Types.ObjectId, ref:"user"},
-  messagess :[{ type: Schema.Types.ObjectId, ref:"message"}]
+  user1: { type: Schema.Types.ObjectId, ref:"User"},
+  user2: { type: Schema.Types.ObjectId, ref:"User"},
+  messages :[{ type: Schema.Types.ObjectId, ref:"Message"}]
 });
 
 module.exports = model("Chat", chatSchema);

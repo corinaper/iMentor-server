@@ -19,26 +19,9 @@ router.get("/:userId/:otherUserId", isAuthenticated, (req,res,next)=>{
             {user2:{$eq:req.params.userId}},
         ]}
     ]})
-
-    .populate({path:"user1", model: User})
-    .populate({path:"user2", model: User})
-    .populate({
-        path:"messagess",
-        populate:{
-            path: "sender",
-            model: "User"
-        },
-        model: "Message"
-    })
-    .populate({
-        path:"messagess",
-        populate:{
-            path: "receiver",
-            model: "User"
-        },
-        model: "Message"
-    })
-
+    .populate("user1")
+    .populate("user2")
+    .populate("messages")
     .then(chat=>{
         res.status(200).json(chat)
     })
@@ -50,7 +33,7 @@ router.post("/newMessage/:chatId/", isAuthenticated, (req,res,next)=>{
 
     Message.create({content, sender, receiver})
     .then(message=>{
-        Chat.findOneAndUpdate({"_id":req.params.chatId}, {$push:{messagess: message._id}}, {new: true})
+        Chat.findOneAndUpdate({"_id":req.params.chatId}, {$push:{messages: message._id}}, {new: true})
         .then(()=>{
             res.status(200).json(message)})
     })
@@ -61,7 +44,7 @@ router.get("/:userId", isAuthenticated, (req,res,next)=>{
     Chat.find({$or:[{user1:{$eq:req.params.userId}},{user2:{$eq:req.params.userId}}]})
     .populate({path:"user1",model:User})
     .populate({path:"user2",model:User})
-    .populate({path:"messagess",model:"Message"})
+    .populate({path:"messages",model:"Message"})
     .then(chats=>{
         res.status(200).json(chats)
     })
@@ -80,9 +63,15 @@ router.post("/create/:user1/:user2",(req,res,next)=>{
             {user2:{$eq:user1}},
         ]}
     ]})
+    .populate("user1")
+    .populate("user2")
+    .populate("messages")
     .then(chats=>{
         if(chats.length<1){
             Chat.create({user1, user2})
+            .populate("user1")
+            .populate("user2")
+            .populate("messages")        
             .then(chat=>{
                 res.status(200).json(chat)
             })
