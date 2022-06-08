@@ -22,12 +22,15 @@ router.post("/questions", isAuthenticated, (req, res) => {
 
     Questions
        .create({ imageUrl, owner: userId, title, description, skills  })
-       .then(question => Users.findByIdAndUpdate(userId,{$push:{questions:question._id}}))
+       .then(question=>{
+        Users.findByIdAndUpdate(userId,{$push:{questions:question._id}})
+        .then(()=>res.json(question))
+    })
        .catch(err => res.status(500).json(err))
        
    })
 
-router.get("/questions/:id", (req, res) => {
+router.get("/questions/:id",  isAuthenticated, (req, res) => {
     
     const {id} = req.params
 

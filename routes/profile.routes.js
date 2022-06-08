@@ -5,7 +5,7 @@ const { OwnerOnly } = require("../middlewares/ownerOnly.middleware")
 const Users = require('../models/User.model')
 
 
-router.get("/profile/:id", (req, res) => {
+router.get("/profile/:id",  isAuthenticated, (req, res) => {
 
   const { id } = req.params
 
@@ -16,7 +16,7 @@ router.get("/profile/:id", (req, res) => {
 })
 
 
-router.post("/profile/:id/edit", (req, res) => {
+router.post("/profile/:id/edit",  isAuthenticated, (req, res) => {
 
   const { username, userType, aboutMe, profileImg, course, graduationYear,skills,ocuppation,company } = req.body
   const {id} = req.params
