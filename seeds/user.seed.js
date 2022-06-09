@@ -1,131 +1,92 @@
+require("dotenv/config")
+require('../db/index')
+
+const mongoose = require('mongoose');
+
 const User = require("../models/User.model");
 
-const users = [
+User.deleteMany()
+.then(()=>
+User.create([
   {
     type: "mentor",
-    username: "aleixAbuli",
+    username: "Aleix Abuli",
     email: "baleix@ironhack.com",
-    password: "",
+    password: "12345678",
     aboutMe: "I've been a graphic designer/community manager for the last two years but right now I hope to become a great developer.",
     profileImg: "https://ca.slack-edge.com/T02CQ4EN4-U02KX5RSJKD-dfc890210a1c-512",
     course: "Web Development",
     graduationYear: 2022,
-    skills: ["REACT", "REDUX", "NODE", "MONGODB", "JAVASCRIPT", "CSS", "HTML"],
+    skills: ['6299c8c9874d54a52ba976fc', '6299c8c9874d54a52ba976fb', '6299c8c9874d54a52ba976fe'],
     ocuppation: "Teacher Assistant",
     company: "Ironhack",
-    posts: 
-      {
-        image: " ",
-        user: "aleixAbuli",
-        title: "How to determine if a number is odd in JS",
-        text: 
-          "
-            function isOdd(num) => return num % 2
-            console.log('1 is ' + isOdd(1))
-            console.log('2 is ' + isOdd(2))
-            console.log('3 is ' + isOdd(3))
-            console.log('4 is ' + isOdd(4))
-          "
-        ,
-        comments: "",
       },
-  },
   {
     type: "mentor",
-    name: "marcoSantonastasi",
+    username: "Marco Santonastasi",
     email: "marco@ironhack.com",
-    password: "",
+    password: "12345678",
     aboutMe: "I run my own engineering firm and I am an instructor in software engineering.",
     profileImg: "https://avatars.githubusercontent.com/u/44085372?v=4",
     course: "Web Development",
     graduationYear: 2020,
-    skills: ["REACT", "REDUX", "NODE", "MONGODB", "JAVASCRIPT", "CSS", "HTML"],
+    skills: ['6299c8c9874d54a52ba976ff', '6299c8c9874d54a52ba976fd', '6299c8c9874d54a52ba97701', '6299c8c9874d54a52ba97702'],
     ocuppation: "Software Engineering Instructor",
     company: "Ironhack",
-    posts: 
-      {
-        image: " ",
-        user: "marcoSantonastasi",
-        title: "How do I loop through or enumerate a JavaScript object?",
-        text: 
-          "
-            var p = {
-              'p1': 'value1',
-              'p2': 'value2',
-              'p3': 'value3'
-            };
-            How do I loop through all of p's elements (p1, p2, p3...) and get their keys and values?
-          ",
-        comments: 
-          "
-            You can use the for-in loop as shown by others. However, you also have to make sure that the key you get is an actual property of an object, and doesn't come from the prototype.
-          ",
-      },
   },
   {
     type: "mentee",
-    name: "pabloDellacassa",
+    username: "Pablo Dellacassa",
     email: "pablodellacassa@ironhack.com",
-    password: "",
+    password: "12345678",
     aboutMe: "In this profile you can check a little bit of the personal projects and this is are the main languages used",
     profileImg: "https://ca.slack-edge.com/T02CQ4EN4-U036UER4GG2-d4e588552193-512",
     course: "Web Development",
     graduationYear: 2022,
-    skills: ["VUE", "SQL", "JAVASCRIPT", "CSS", "HTML", "NODE", "MONGODB"],
-    ocuppation: "Student",
-    company: " ",
-    posts: 
-      {
-        image: " ",
-        user: "pabloDellacassa",
-        title: "Accesing the index in 'for' loops",
-        text: 
-          "
-            xs = [8, 23, 45]
-            for x in xs:
-                print('item #{} = {}'.format(index, x))
-
-            Desired output:
-            item #1 = 8
-            item #2 = 23
-            item #3 = 45
-          ",
-        comments: "for idx, x in enumerate(xs): print(idx, x)",
-      },
+    skills: ['6299c8c9874d54a52ba97703', '6299c8c9874d54a52ba97700', '6299c8c9874d54a52ba976fd', '6299c8c9874d54a52ba976ff'],
   },
   {
     type: "mentee",
-    name: "samyAli",
+    username: "Samy Ali",
     email: "samy@ironhack.com",
-    password: "",
+    password: "12345678",
     aboutMe: "Learning by doing",
     profileImg: "https://avatars.githubusercontent.com/u/102321253?v=4",
     course: "Web Development",
     graduationYear: 2022,
-    skills: ["HTML", "Jest", "Svelte", "React","MongoDB"],
-    ocuppation: "Student",
-    company: "Ironhack",
-    posts: 
-      {
-        image: " ",
-        title: "How to use the 'for' loop in JavaScript?",
-        user: "samyAli",
-        text: 
-          "
-            var linkElement = document.getElementById('BackButton');
-            var loc_array = document.location.href.split('/');
-            var newT = document.createTextNode(unescape(capWords(loc_array[loc_array.length-2]))); 
-            linkElement.appendChild(newT);
-            Currently it takes the second to last item in the array from the URL. However, I want to do a check for the last item in the array to be 'index.html' and if so, grab the third to last item instead.
-          ",
-        comments: 
-          "
-            if (loc_array.at(-1) === 'index.html') {
-              // do something
-            } else {
-              // something else
-            }
-          ",
-      },
+    skills: ['6299c8c9874d54a52ba97700', '6299c8c9874d54a52ba976fd', '6299c8c9874d54a52ba976ff'],
   },
-];
+  {
+    type: "mentor",
+    username: "Klaus",
+    email: "klausy@ironhack.com",
+    password: "12345678",
+    aboutMe: "I've been working as a senior developer for the past 10 years",
+    profileImg: "https://www.redeszone.net/app/uploads-redeszone.net/2022/03/hacker-sombrero-gris.jpg",
+    course: "Web Development",
+    graduationYear: 2020,
+    skills: ['6299c8c9874d54a52ba976ff', '6299c8c9874d54a52ba976fd', '6299c8c9874d54a52ba97701', '6299c8c9874d54a52ba97702'],
+    ocuppation: "Senior Developer",
+    company: "Fancy Company",
+      },
+
+      {
+        type: "mentor",
+        username: "Queen Elizabeth II",
+        email: "queen@ironhack.com",
+        password: "12345678",
+        aboutMe: "I've been working as a UX designer in my free time for the past 70 years",
+        profileImg: "https://www.rct.uk/sites/default/files/styles/rctr-scale-1010w/public/Teaser%20-%20Rainbow%20Queen.jpg?itok=jcco0h3U",
+        course: "Web Development",
+        graduationYear: 2020,
+        skills: ['6299c8c9874d54a52ba97707', '6299c8c9874d54a52ba97708', '6299c8c9874d54a52ba97704', '6299c8c9874d54a52ba9770a'],
+        ocuppation: "Senior Developer",
+        company: "Fancy Company",
+          },
+]))
+
+.then(()=>{
+  console.log(`${User.length} users successfully created`)
+//   mongoose.connection.close()
+})
+.catch((err)=>console.log("couldn't add the users", err))
