@@ -7,4 +7,4 @@ const chatSchema = new Schema({
   messages :[{ type: Schema.Types.ObjectId, ref:"Message"}]
 });
 
-module.exports = model("Chat", chatSchema);
+module.exports = model("Chat", chatSchema); 
