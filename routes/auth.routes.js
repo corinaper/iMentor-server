@@ -54,6 +54,7 @@ router.post('/signup', (req, res, next) => {
 router.post('/login', (req, res, next) => {
 
   const { email, password } = req.body
+  console.log("from auth login", req.body)
 
   if (email === '' || password === '') {
     res.status(400).json({ message: "Provide email and password." });

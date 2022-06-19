@@ -5,7 +5,7 @@ const { OwnerOnly } = require("../middlewares/ownerOnly.middleware")
 const Users = require('../models/User.model')
 
 
-router.get("/profile/:id",  isAuthenticated, (req, res) => {
+router.get("/profile/:id", isAuthenticated, (req, res) => {
 
   const { id } = req.params
 

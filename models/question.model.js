@@ -20,12 +20,12 @@ const questionSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
-        Comments: [{
+        comments: [{
             type: Schema.Types.ObjectId,
             ref: 'comments'
         }],	
         skills: [{
-            type: Schema.Types.ObjectId, ref:"skills"
+            type: Schema.Types.ObjectId, ref:"Skills"
         }]
     },
     {

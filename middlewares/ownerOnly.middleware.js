@@ -1,5 +1,5 @@
 function isOwner(req,res,next){
-    return req.payload._id === req.params
+    return req.payload._id === req.params.userId
 }
 
 

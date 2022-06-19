@@ -2,13 +2,14 @@ const express = require("express");
 const User = require("../models/User.model");
 const Message = require("../models/Message.model");
 const Chat = require("../models/Chat.model")
+const { isOwner } = require("../middlewares/ownerOnly.middleware")
 
 const { isAuthenticated } = require('../middlewares/jwt.middleware.js');
 
 const router = express.Router();
 
 
-router.get("/:userId/:otherUserId", isAuthenticated, (req,res,next)=>{
+router.get("/:userId/:otherUserId", isOwner, (req,res,next)=>{
     Chat.findOne({$or:[
         {$and:[
             {user1:{$eq:req.params.userId}},
@@ -40,7 +41,7 @@ router.post("/newMessage/:chatId/", isAuthenticated, (req,res,next)=>{
 })
 
 
-router.get("/:userId", isAuthenticated, (req,res,next)=>{
+router.get("/:userId", isOwner, (req,res,next)=>{
     Chat.find({$or:[{user1:{$eq:req.params.userId}},{user2:{$eq:req.params.userId}}]})
     .populate({path:"user1",model:User})
     .populate({path:"user2",model:User})

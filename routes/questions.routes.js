@@ -73,15 +73,15 @@ router.post("/questions/:id/comment/add", isAuthenticated, (req, res) => {
     .create({ user: userId,text: comment})
     .then((newComment)=>
     Questions
-    .findByIdAndUpdate(questionId, {$push: { Comments: newComment._id}},{new: true})
+    .findByIdAndUpdate(questionId, {$push: { comments: newComment._id}},{new: true})
     .then((updatedQuestion)=> 
         Users
-        .findByIdAndUpdate(userId, {$push: { Comments: newComment._id}})
+        .findByIdAndUpdate(userId, {$push: { comments: newComment._id}})
             .then(()=>
             Questions
                 .findOne(updatedQuestion)
-                .populate("Comments")
-                .populate({path:"Comments", populate:{path:"user"}})
+                .populate("comments")
+                .populate({path:"comments", populate:{path:"user"}})
                 )
             .then((populatedQuestion)=>res.json(populatedQuestion))
     ))

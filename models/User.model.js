@@ -13,7 +13,7 @@ const userSchema = new Schema({
         type: String, required: true
     },
     username: {
-        type: String, required: true, unique: true
+        type: String, required: true
     },
     aboutMe: {
         type:String, default: ""
@@ -22,7 +22,7 @@ const userSchema = new Schema({
         type: String, default:"http://cdn.onlinewebfonts.com/svg/img_574534.png"
     },
     chats:[{
-        type: Schema.Types.ObjectId, ref:"chat"
+        type: Schema.Types.ObjectId, ref:"Chat"
     }], 
     ocuppation:	{
         type:String
@@ -31,7 +31,7 @@ const userSchema = new Schema({
         type:String
     },
     skills: [{
-        type: Schema.Types.ObjectId, ref:"skills"
+        type: Schema.Types.ObjectId, ref:"Skills"
     }],
     course: {
         type: String,
@@ -40,7 +40,7 @@ const userSchema = new Schema({
     graduationYear:	{
         type:Number
     },
-     Comments: [{type: Schema.Types.ObjectId, ref:"comments"}],
+     comments: [{type: Schema.Types.ObjectId, ref:"Comments"}],
      questions:	[{type: Schema.Types.ObjectId, ref:"Question"}]
 })
 
