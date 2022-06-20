@@ -10,7 +10,7 @@ router.get("/profile/:id", isAuthenticated, (req, res) => {
   const { id } = req.params
 
   Users
-    .findById(id).populate("skills").populate("questions")
+    .findById(id).populate("questions")
     .then(user => res.json(user))
     .catch(err => console.log(err))
 })

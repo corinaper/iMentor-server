@@ -3,8 +3,8 @@ const router = require("express").Router()
 const { isAuthenticated } = require("../middlewares/jwt.middleware")
 const { OwnerOnly } = require("../middlewares/ownerOnly.middleware")
 const Users = require('../models/User.model')
-const Questions = require('../models/question.model')
-const Comments = require('../models/comment.model')
+const Questions = require('../models/Question.model')
+const Comments = require('../models/Comment.model')
 
 
 router.get("/questions", (req, res) => {
@@ -36,8 +36,8 @@ router.get("/questions/:id",  isAuthenticated, (req, res) => {
 
     Questions
        .findById(id).populate('owner')
-       .populate("Comments")
-        .populate({path:"Comments", populate:{path:"user"}})
+       .populate("comments")
+       .populate({path:"comments", populate:{path:"user"}})
        .then(question => res.json(question))
        .catch(err => res.status(500).json(err))
    })

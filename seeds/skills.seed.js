@@ -3,7 +3,7 @@ require('../db/index')
 
 const mongoose = require('mongoose');
 
-const Skills = require("../models/skills.model");
+const Skills = require("../models/Skills.model");
 
 Skills.deleteMany()
 .then(()=>
