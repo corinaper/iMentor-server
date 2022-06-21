@@ -11,6 +11,7 @@ router.get("/profile/:id", isAuthenticated, (req, res) => {
 
   Users
     .findById(id).populate("questions")
+    .populate({path:"questions", populate:{path:"owner"}})
     .then(user => res.json(user))
     .catch(err => console.log(err))
 })
